@@ -1,0 +1,4 @@
+# do daily/weekly/monthly maintenance
+# min   hour    day     month   weekday command
+*/5     *       *       *       *       /runtime/crond/scripts/heartbeat.sh > /proc/1/fd/1 2>/proc/1/fd/2
+0       3       *       *       *       /runtime/crond/scripts/update-blackhole-list.sh > /proc/1/fd/1 2>/proc/1/fd/2

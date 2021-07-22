@@ -1,0 +1,45 @@
+version: "3"
+services:
+  unbound:
+    build: ./unbound-build/.
+    container_name: unbound
+    image: nullping/unbound:latest
+    ports:
+      - "0.0.0.0:53:53/tcp"
+      - "0.0.0.0:53:53/udp"
+      - "0.0.0.0:853:853/udp"
+    volumes:
+      - "/etc/localtime:/etc/localtime:ro"
+      - "./data/local-names.conf:/runtime/unbound/conf.d/local-names.conf:ro"
+      - "./runtime:/runtime"
+      - "/data/ssl-certs/fullchain.pem:/runtime/unbound/ssl/fullchain.pem:ro"
+      - "/data/ssl-certs/cert.pem:/runtime/unbound/ssl/cert.pem:ro"
+      - "/data/ssl-certs/privkey.pem:/runtime/unbound/ssl/privkey.pem:ro"
+    environment:
+      - DEBUG=1
+    restart: unless-stopped
+    healthcheck:
+      disable: 'true'
+    networks:
+      default:
+        ipv4_address: 172.102.0.2
+  crond:
+    build: ./crond-build/.
+    container_name: unbound-crond
+    image: nullping/unbound-crond:latest
+    volumes:
+      - "/etc/localtime:/etc/localtime:ro"
+      - "./runtime:/runtime"
+    restart: unless-stopped
+    healthcheck:
+      disable: 'true'
+    networks:
+      default:
+        ipv4_address: 172.102.0.3
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      config:
+      - subnet:  172.102.0.1/16
