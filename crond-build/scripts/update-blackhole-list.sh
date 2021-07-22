@@ -13,7 +13,7 @@ fi
 
 # get block lists and append to a master list (if concatenating more than 1 list, do it here)
 echo "$me: downloading public blocklists."
-wget --quiet -O /tmp/blocklist https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn-social/hosts
+wget --quiet -O /tmp/blocklist https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn/hosts
 
 # post processing or blocklist 
 echo "$me: filter, merge, sort, and removing duplicates from blocklist"
