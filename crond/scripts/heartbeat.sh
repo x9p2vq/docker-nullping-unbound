@@ -7,7 +7,7 @@ me=$(basename $0)
 file="/runtime/unbound/conf.d/blackhole.conf"
 
 # get last update to file
-if [ -e $file ]
+if [ -f $file ]
 then
   last_update=$(date -d "$(stat -c "%y" $file | cut -d. -f1)" '+%s')
 else

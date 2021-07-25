@@ -7,7 +7,7 @@ me=$(basename $0)
 file="/runtime/unbound/conf.d/blackhole.conf"
 
 # backup existing blackhole list
-if [ -e $file ]; then
+if [ -f $file ]; then
   cp $file /tmp/blackhole.conf.bak
 fi
 
@@ -43,7 +43,7 @@ echo "$me: reloading unbound configuration in 60 seconds."
 sleep 60s
 response=$(/usr/sbin/unbound-control -c /runtime/unbound/unbound.conf -s 172.102.0.2@8953 reload)
 
-if [ "$response" = "ok" ]
+if [ "$response" == "ok" ]
 then
   echo "$me: unbound-control reloaded successfully." 
 else
