@@ -1,7 +1,7 @@
 version: "3"
 services:
   unbound:
-    build: ./unbound-build/.
+    build: ./unbound/.
     container_name: unbound
     image: nullping/unbound:latest
     ports:
@@ -21,7 +21,7 @@ services:
       default:
         ipv4_address: 172.102.0.2
   crond:
-    build: ./crond-build/.
+    build: ./crond/.
     container_name: unbound-crond
     image: nullping/unbound-crond:latest
     volumes:
